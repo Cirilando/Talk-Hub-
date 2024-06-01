@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { IoIosClose } from "react-icons/io";
-
+import AuthLayout from "./AuthLayout";  // Adjust the import path as needed
 
 const Register = () => {
   const initialData = {
@@ -52,14 +52,14 @@ const Register = () => {
       formData.append("name", regData.name);
       formData.append("password", regData.password);
       formData.append("email", regData.email);
-      formData.append("profilePic", regData.profilePic); // Append the profile picture file
+      formData.append("profilePic", regData.profilePic);
 
       const response = await axios.post(
         `${url}/register`,
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set content type to multipart/form-data for file upload
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -82,9 +82,9 @@ const Register = () => {
   };
 
   return (
-    <>
-      <div className="w-full flex justify-center mt-10">
-        <div className="bg-gray-100 w-11/12 max-w-md p-8 rounded-lg shadow-md">
+    <AuthLayout>
+      <div className="w-full flex flex-col items-center mt-4">
+        <div className="bg-white w-11/12 max-w-md p-8 rounded-lg shadow-md">
           <div className="text-center mb-8">
             <p className="text-xl font-bold">Registration</p>
             <p className="text-gray-700">Get Your Talk Hub account now.</p>
@@ -173,17 +173,17 @@ const Register = () => {
             </button>
           </form>
         </div>
-      </div>
-      <div className="mt-8 text-center">
-        <p className="text-lg">
-          Already have an account?
-          <Link to="/email" className="text-indigo-600 ml-2">
-            Sign In
-          </Link>
-        </p>
+        <div className="mt-8 text-center">
+          <p className="text-lg">
+            Already have an account?
+            <Link to="/email" className="text-indigo-600 ml-2">
+              Sign In
+            </Link>
+          </p>
+        </div>
       </div>
       <p className="mt-8 text-center text-gray-600">&copy; Talk Hub All rights reserved.</p>
-    </>
+    </AuthLayout>
   );
 };
 
