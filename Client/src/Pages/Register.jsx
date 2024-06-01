@@ -45,6 +45,7 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
+    const url = import.meta.env.VITE_API_URL;
     e.preventDefault();
     try {
       const formData = new FormData();
@@ -54,7 +55,7 @@ const Register = () => {
       formData.append("profilePic", regData.profilePic); // Append the profile picture file
 
       const response = await axios.post(
-        "http://localhost:8080/register",
+        `${url}/register`,
         formData,
         {
           headers: {
