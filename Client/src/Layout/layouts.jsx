@@ -10,7 +10,7 @@ const AuthLayout = ({children}) => {
             src={logo}
             alt="Logo"
           />
-          <p className=" mt-2 md:mt-5 font-bold font-serif md:text-xl">
+          <p className=" mt-2 md:mt-5 font-bold font-serif md:text-xl bg-red-900">
             Talk Hub
           </p>
         </div>
