@@ -87,7 +87,7 @@ const Home = () => {
             <img src={logo} width={150} alt="logo" />
             <p className="font-bold font-serif md:text-3xl">Talk Hub</p>
           </div>
-          <p className="md:ml-16"> Select User To Send Message</p>
+          <p className="md:ml-24"> Select User To Send Message</p>
         </div>
       </div>
     </div>
