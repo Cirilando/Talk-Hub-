@@ -20,6 +20,10 @@ const io = new Server(socketConnection, {
     credentials: true,
   },
 });
+io.use((socket, next) => {
+  console.log("Origin:", socket.handshake.headers.origin);
+  next();
+});
 
 //for showing online or not
 const onlineUser = new Set();
