@@ -182,7 +182,7 @@ const Register = () => {
           </Link>
         </p>
       </div>
-      <p className="mt-8 text-center text-gray-600">&copy; Talk Hub All rights reserved.</p>
+      <p className=" text-center text-gray-600">&copy; Talk Hub All rights reserved.</p>
     </>
   );
 };
