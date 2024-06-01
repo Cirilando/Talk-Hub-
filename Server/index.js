@@ -9,7 +9,7 @@ const {app,socketConnection} = require("./Socket/socketio")
 // const app = express();
 dotenv.config();
 app.use(express.json());
-const allowedOrigin = "https://talkhubchatapplication.netlify.app/";
+const allowedOrigin = ['https://talkhubchatapplication.netlify.app', 'http://localhost:5173'];
 app.use(cookieParser())
 app.use(cors({
   origin: allowedOrigin,
