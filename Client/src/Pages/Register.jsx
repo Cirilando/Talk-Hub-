@@ -174,7 +174,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-      <div className="mt-8 text-center">
+      <div className="mt-4 text-center">
         <p className="text-lg">
           Already have an account?
           <Link to="/email" className="text-indigo-600 ml-2">
