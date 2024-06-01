@@ -84,7 +84,7 @@ const Register = () => {
   return (
     <>
       <div className="w-full flex justify-center mt-10">
-        <div className="bg-gray-100 w-11/12 max-w-md p-8 rounded-lg shadow-md">
+        <div className="bg-gray-100 w-10/12 max-w-md p-8 rounded-lg shadow-md">
           <div className="text-center mb-8">
             <p className="text-xl font-bold">Registration</p>
             <p className="text-gray-700">Get Your Talk Hub account now.</p>
