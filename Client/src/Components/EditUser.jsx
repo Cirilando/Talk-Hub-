@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Avatar from "./Icon";
-import axiosInstance from "../Interceptors/Interceptor"
+import axiosInstance from "../Interceptors/Interceptor";
 import toast from "react-hot-toast";
 
 const EditUser = ({ onClose, data }) => {
   const [editData, setEditData] = useState({
     name: data?.user,
     profilePic: data?.profilePic,
+    email : data?.email
   });
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const EditUser = ({ onClose, data }) => {
       const formData = new FormData();
       formData.append("name", editData.name);
       formData.append("profilePic", editData.profilePic);
+      formData.append("email",editData.email)
   
       const response = await axiosInstance.put('/update', formData, {
         headers: {
@@ -52,50 +54,54 @@ const EditUser = ({ onClose, data }) => {
         }
       });
       toast.success(response.data.message);
-      // onClose()
+      onClose()
     } catch (error) {
       toast.error("Something went wrong");
     }
   };
 
-  // const clearImage = () => {
-  //   setEditData((prev) => ({
-  //     ...prev,
-  //     profilePic: null,
-  //   }));
-  // };
-
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white md:p-4 md:m-1 rounded-xl w-full max-w-sm">
-        <h2 className="font-semibold">Profile Details</h2>
-        <p className="text-sm">Edit User Details</p>
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10">
+      <div className="bg-white p-4 m-4 sm:m-6 rounded-xl w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
+        <h2 className="font-semibold text-lg md:text-xl">Profile Details</h2>
+        <p className="text-sm md:text-base">Edit User Details</p>
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="name">Name : </label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="name" className="text-sm md:text-base">Name:</label>
             <input
               type="text"
               name="name"
               id="name"
               value={editData.name}
               onChange={handleClick}
-              className="w-full md:px-1 md:py-1 focus:outline-"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></input>
           </div>
-          <div>
-            <p>Photo : </p>
-            <div className="flex items-center gap-5">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="text-sm md:text-base">Email:</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={editData.email}
+              onChange={handleClick}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            ></input>
+          </div>
+          <div className="mt-4">
+            <p className="text-sm md:text-base">Photo:</p>
+            <div className="flex items-center gap-5 mt-2">
               <Avatar
                 width={40}
                 height={40}
                 imageUrl={data?.profilePic}
                 name={data?.name}
-                className="md:px-1 md:py-1"
+                className="w-10 h-10 md:w-12 md:h-12"
               />
               <label htmlFor="profilePic">
                 <button
                   type="button"
-                  className="font-semibold md:px-1 md:py-1"
+                  className="font-semibold text-blue-500 hover:underline"
                   onClick={handleUploadPhoto}
                 >
                   Change Photo
@@ -111,17 +117,17 @@ const EditUser = ({ onClose, data }) => {
               </label>
             </div>
           </div>
-          <div className="flex gap-2 w-fit ml-auto">
+          <div className="flex justify-end gap-2 mt-6">
             <button
               type="button"
               onClick={onClose}
-              className="border border-blue-700 text-blue-500 md:px-4 md:py-1 md:mt-4 rounded-xl font-semibold hover:bg-indigo-800 hover:text-white"
+              className="text-blue-500 bg-transparent px-4 py-2 rounded-xl font-semibold hover:bg-blue-500 hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="border border-blue-700 text-blue-500 md:px-4 md:py-1 md:mt-4 rounded-xl font-semibold hover:bg-indigo-800 hover:text-white"
+              className="text-blue-500 bg-transparent px-4 py-2 rounded-xl font-semibold hover:bg-blue-500 hover:text-white transition-colors"
             >
               Save
             </button>

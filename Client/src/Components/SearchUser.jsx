@@ -29,7 +29,7 @@ const SearchUser = ({ onClose }) => {
   }, [searchInput]);
 
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 bg-slate-700 bg-opacity-40 p-2 z-10 ">
+    <div className="fixed top-0 bottom-0 left-0 right-0 bg-slate-700 bg-opacity-40 p-2 z-10">
       <div className="w-full max-w-lg mx-auto mt-10">
         <div className="bg-white rounded h-14 overflow-hidden flex">
           <input
@@ -65,8 +65,7 @@ const SearchUser = ({ onClose }) => {
           )}
 
           {searchUser.length !== 0 && !loading && (
-            <div className="max-h-60 overflow-y-auto">
-              {/* Set max height and enable scrolling */}
+            <div className="max-h-[550px] md:max-h-[600px] overflow-y-auto scrollbar">
               {searchUser.map((user) => (
                 <UserCard key={user._id} user={user} onClose={onClose} />
               ))}
@@ -76,7 +75,7 @@ const SearchUser = ({ onClose }) => {
       </div>
 
       <div
-        className="absolute top-0 right-0 text-2xl p-2 lg:text-4xl hover:text-white"
+        className="absolute top-0 right-0 text-2xl p-2 lg:text-4xl hover:text-white cursor-pointer"
         onClick={onClose}
       >
         <IoClose />

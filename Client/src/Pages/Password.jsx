@@ -34,38 +34,38 @@ const Password = () => {
     e.preventDefault();
     const emailId = localStorage.getItem("emailId");
     const url = import.meta.env.VITE_API_URL;
-
+  
     try {
-      let datas = {
+      const datas = {
         email: emailId,
         password: passwordData.password,
       };
-
+  
       const response = await axios.post(`${url}/login`, datas, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
+  
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
-      }
-
-      if (response.data.success) {
-        dispatch(setToken(response?.data?.token));
-        localStorage.setItem("token", response?.data?.token);
-        toast.success(response.data.message);
-        setPasswordData({
-          password: "",
-        });
-        history("/home");
+        if (response.data.success) {
+          localStorage.setItem("token", response.data.token);
+          dispatch(setToken(response.data.token));
+          toast.success(response.data.message);
+          setPasswordData({ password: "" });
+          history("/home");
+        } else {
+          toast.error(response.data.message);
+        }
       } else {
-        toast.error(response.data.message);
+        toast.error("Login failed");
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      const errorMessage = error.response?.data?.message || "Something went wrong";
+      toast.error(errorMessage);
     }
   };
+  
 
   return (
     <>
