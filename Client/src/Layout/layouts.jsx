@@ -18,5 +18,4 @@ const AuthLayout = ({children}) => {
     </>
   )
 }
-
 export default AuthLayout;
