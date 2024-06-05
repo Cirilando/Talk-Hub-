@@ -143,7 +143,7 @@ const Message = () => {
       <header className="sticky top-0 h-16 bg-gray-200  flex justify-between items-center px-4">
         <div className="flex items-center gap-4">
           <Link to="/home" className="md:hidden">
-            <FaAngleLeft size={25} />
+            <FaAngleLeft size={25}  />
           </Link>
           <div>
             <Avatar
@@ -172,6 +172,7 @@ const Message = () => {
           </button>
         </div>
       </header>
+      
       {/* showing all the messages */}
 
       <section className="h-[calc(100vh-128px)] overflow-x-hidden overflow-y-scroll scrollbar relative ">
