@@ -13,7 +13,7 @@ const Email = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
+  
   const handleSubmit = async (e) => {
     const url = import.meta.env.VITE_API_URL;
 
