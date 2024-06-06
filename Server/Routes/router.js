@@ -5,13 +5,13 @@ const fs = require("fs")
 const {userCreateData,emailIdChecking, loginData, userDetails, updateDetails, searchUser, allUserDetails} = require("../Controllers/userControllers")
 const verifyToken = require("../Middleware/auth")
 const router  = express.Router()
-const uploadDir = path.join("public","files")
-if(!fs.existsSync(uploadDir)){
-  fs.mkdirSync(uploadDir,{recursive:true})
-}
+// const uploadDir = path.join("public","files")
+// if(!fs.existsSync(uploadDir)){
+//   fs.mkdirSync(uploadDir,{recursive:true})
+// }
 
 const Ciril = multer.diskStorage({
-    destination: uploadDir,
+    destination:"./public/files",
     filename: (req, file, cb) => {
       const uniqueId = Date.now();
       const fileformat = file.originalname.split(".").pop();

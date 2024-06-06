@@ -215,6 +215,7 @@ const Message = () => {
                   <p className="px-1">{msg.text}</p>
                   <p className="text-xs text-right">
                     {moment(msg.createdAt).format("hh:mm")}
+                    {/* {new Date(msg.createdAt).toLocaleTimeString()} */}
                   </p>
                 </div>
               </div>

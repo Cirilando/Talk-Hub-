@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const userCreateData = async (req, res) => {
   try {
     const {name,  email, password,profilePic } = req.body;
-    // let file = req.file;
+    let file = req.file;
    
     const userExist = await userDB.findOne({ email });
 
@@ -31,7 +31,7 @@ const userCreateData = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     let datas = {
       ...req.body,
-      profilePic: req.file ? req.file.filename : null,
+      profilePic: file ? file.filename : null,
       password: hashedPassword
 
     };

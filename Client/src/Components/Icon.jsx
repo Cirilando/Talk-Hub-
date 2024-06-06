@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PiUserCircle } from "react-icons/pi";
 import { useSelector } from "react-redux";
 
-const Avatar = ({ userId, name, imageUrl, width, height }) => {
+const Avatar = ({ userId, name, width, height }) => {
   const onlineUser = useSelector((state) => state?.user?.onlineUser);
-  
-  // Fetch name from local storage 
+  // const [imageUrl, setImageUrl] = useState(null);
+
+  // useEffect(() => {
+  //   // Fetch image URL from backend
+  //   fetch("/pic") // Assuming this endpoint serves the profile picture for the user
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return response.blob();
+  //     })
+  //     .then((blob) => {
+  //       const imageUrl = URL.createObjectURL(blob);
+  //       setImageUrl(imageUrl);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching image:", error);
+  //     });
+  // }, []);
+
+  // Fetch name from local storage
   const ciril = localStorage.getItem("name");
 
   // Use the name from props or ciril
@@ -38,6 +57,7 @@ const Avatar = ({ userId, name, imageUrl, width, height }) => {
   const randomNumber = Math.floor(Math.random() * 9);
 
   const isOnline = onlineUser.includes(userId);
+
   return (
     <div
       className={`text-slate-800 rounded-full font-bold relative`}
