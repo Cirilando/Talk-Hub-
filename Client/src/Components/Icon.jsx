@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PiUserCircle } from "react-icons/pi";
 import { useSelector } from "react-redux";
 
-const Avatar = ({ userId, name, width, height }) => {
+const Avatar = ({ userId, name, width, height,imageUrl }) => {
   const onlineUser = useSelector((state) => state?.user?.onlineUser);
   // const [imageUrl, setImageUrl] = useState(null);
 
@@ -65,7 +65,7 @@ const Avatar = ({ userId, name, width, height }) => {
     >
       {imageUrl ? (
         <img
-          src={imageUrl}
+          // src={imageUrl}
           width={width}
           height={height}
           alt={displayName}

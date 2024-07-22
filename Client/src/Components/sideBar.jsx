@@ -52,7 +52,6 @@ const handleLogOut = ()=>{
   dispatch(logOut())
   navigate("/email")
   localStorage.clear()
-
 }
   return (
     <>
