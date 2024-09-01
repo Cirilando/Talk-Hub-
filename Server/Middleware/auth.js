@@ -2,12 +2,12 @@ const jwt = require("jsonwebtoken");
 const userDB = require("../Models/userModels");
 
 const verifyToken = async (req, res, next) => {
-    const token = req.headers.authorization
+  const token = req.headers.authorization;
 
   if (!token) {
     return res.status(401).json({
       message: "Authorization header missing. User must be logged in...",
-      logout :true
+      logout: true,
     });
   }
 
@@ -22,7 +22,7 @@ const verifyToken = async (req, res, next) => {
     const payload = jwt.verify(withoutBearer, "nothing");
     console.log("id", payload.id);
     const user = await userDB.findById(payload.id);
-    
+
     // console.log("user", user);
     if (!user) {
       return res.status(401).json({

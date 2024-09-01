@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   console.log("Origin:", req.headers.origin);
   next();
 });
-const allowedOrigin = ['https://talkhubchatapplication.netlify.app', 'http://localhost:5173'];
+const allowedOrigin = ['https://talkhubchatapplication.netlify.app', 'http://localhost:5173', 'http://localhost:5175'];
 app.use(cookieParser())
 app.use(cors({
   origin: allowedOrigin,
@@ -22,7 +22,7 @@ app.use(cors({
 }));
 Connect();
 app.use(router);
-const port = 8080;
+const port = 8088;
 app.get("/", (req, res) => {
   res.json({
     message: "Server is Running on",

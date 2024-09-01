@@ -15,7 +15,7 @@ app.use(cors());
 const socketConnection = http.createServer(app);
 const io = new Server(socketConnection, {
   cors: {
-    origin:  ['https://talkhubchatapplication.netlify.app', 'http://localhost:5173'],
+    origin:  ['https://talkhubchatapplication.netlify.app','http://localhost:5175','http://localhost:5173'],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   },

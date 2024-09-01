@@ -30,7 +30,7 @@ export const userSlice = createSlice({
       state.email = "";
       state.profilePic = "";
       state.token = "";
-      state.socketConnection = null // socketconnection needs to be null after the logout 
+      state.socketConnection = null 
     },
     setOnlineUser : (state,action)=>{
       state.onlineUser = action.payload

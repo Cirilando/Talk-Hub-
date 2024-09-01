@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 // const verifyToken = require("../Middleware/auth");
 const userCreateData = async (req, res) => {
   try {
-    const {name,  email, password,profilePic } = req.body;
+    const { name, email, password, profilePic } = req.body;
     let file = req.file;
-   
+
     const userExist = await userDB.findOne({ email });
 
     if (userExist) {
@@ -16,13 +16,13 @@ const userCreateData = async (req, res) => {
         .json({ message: "User already exists", success: false });
     }
 
-    if (!name  || !email || !password) {
+    if (!name || !email || !password) {
       return res
         .status(200)
         .json({ message: "All the fields are required...", success: false });
     }
 
-    if (!validator.isEmail(email)) {  
+    if (!validator.isEmail(email)) {
       return res
         .status(200)
         .json({ message: "Email must be valid", success: false });
@@ -32,12 +32,11 @@ const userCreateData = async (req, res) => {
     let datas = {
       ...req.body,
       profilePic: file ? file.filename : null,
-      password: hashedPassword
-
+      password: hashedPassword,
     };
     // console.log("data ",datas)
     const newUser = new userDB(datas);
-    
+
     await newUser.save();
     // console.log("ProfilePic:",profilePic)
 
@@ -47,7 +46,7 @@ const userCreateData = async (req, res) => {
       data: newUser,
     });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({
       message: "Failed to create user",
       success: false,
@@ -59,7 +58,7 @@ const emailIdChecking = async (req, res) => {
   try {
     const { email } = req.body;
     const checkEmail = await userDB.findOne({ email }).select("-password");
-    
+
     if (!checkEmail) {
       return res.status(404).json({
         message: "User doesn't exist",
@@ -82,33 +81,41 @@ const emailIdChecking = async (req, res) => {
   }
 };
 
-
 const loginData = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await userDB.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found", success: false });
+      return res
+        .status(404)
+        .json({ message: "User not found", success: false });
     }
 
     const passwordMatching = await bcrypt.compare(password, user.password);
     if (!passwordMatching) {
-      return res.status(401).json({ message: "Incorrect password", success: false });
+      return res
+        .status(401)
+        .json({ message: "Incorrect password", success: false });
     }
 
     const token = jwt.sign({ id: user._id }, "nothing", { expiresIn: "1y" });
-    
-    res.cookie("token", token)
-       .status(200)
-       .json({ message: "Login successful", success: true, token: token });
-       
+
+    res
+      .cookie("token", token)
+      .status(200)
+      .json({ message: "Login successful", success: true, token: token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to login", success: false, error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Failed to login",
+        success: false,
+        error: error.message,
+      });
   }
 };
-
 
 const userDetails = async (req, res) => {
   try {
@@ -140,7 +147,7 @@ const allUserDetails = async (req, res) => {
     return res.status(200).json({
       message: "fetched the data",
       data: allData,
-      success:true
+      success: true,
     });
   } catch (error) {
     console.error(error);
@@ -173,12 +180,12 @@ const allUserDetails = async (req, res) => {
 // }
 const updateDetails = async (req, res) => {
   try {
-    const token = req.userId
+    const token = req.userId;
     // const user = await userDB.findByIdAndUpdate(token)
-    const { name,profilePic} = req.body;
+    const { name, profilePic } = req.body;
     const updateUser = await userDB.findByIdAndUpdate(
       token,
-      { name,profilePic },
+      { name, profilePic },
       { new: true }
     );
     if (!updateUser) {
@@ -190,7 +197,7 @@ const updateDetails = async (req, res) => {
     return res.status(200).json({
       message: "User details updated successfully",
       data: updateUser,
-      success:true
+      success: true,
     });
   } catch (error) {
     console.error(error);
@@ -202,25 +209,21 @@ const updateDetails = async (req, res) => {
   }
 };
 
-const searchUser = async (req,res)=>{
+const searchUser = async (req, res) => {
   try {
-    
-    const {search}  = req.body;
-    const query = new RegExp(search,"i","g")
+    const { search } = req.body;
+    const query = new RegExp(search, "i", "g");
     //RegExp = regular expression
     //i = case-insensitive it will match both uppercase and lowercase
-    //g = used to search globally 
+    //g = used to search globally
 
     const userSearch = await userDB.find({
-      "$or":[
-        {name:query},
-        {email:query}
-      ]
-    })
+      $or: [{ name: query }, { email: query }],
+    });
     res.status(200).json({
       message: "Successfully fetched the data",
       data: userSearch,
-      success:true
+      success: true,
     });
   } catch (error) {
     res.status(500).json({
@@ -229,7 +232,7 @@ const searchUser = async (req,res)=>{
       error: error.message,
     });
   }
-}
+};
 module.exports = {
   userCreateData,
   emailIdChecking,
@@ -237,5 +240,5 @@ module.exports = {
   userDetails,
   updateDetails,
   searchUser,
-  allUserDetails
+  allUserDetails,
 };
