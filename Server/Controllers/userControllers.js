@@ -233,6 +233,11 @@ const searchUser = async (req, res) => {
     });
   }
 };
+
+
+const update = ()=>{
+
+}
 module.exports = {
   userCreateData,
   emailIdChecking,
@@ -241,4 +246,5 @@ module.exports = {
   updateDetails,
   searchUser,
   allUserDetails,
+  update
 };
