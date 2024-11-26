@@ -19,7 +19,6 @@ const verifyToken = async (req, res, next) => {
   }
   try {
     const payload = jwt.verify(withoutBearer, "nothing");
-    console.log("id", payload.id);
     const user = await userDB.findById(payload.id);
 
     // console.log("user", user);
