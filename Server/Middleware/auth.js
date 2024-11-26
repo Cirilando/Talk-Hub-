@@ -17,7 +17,6 @@ const verifyToken = async (req, res, next) => {
       message: "Bearer token missing. User must be logged in...",
     });
   }
-  console.log("token", withoutBearer);
   try {
     const payload = jwt.verify(withoutBearer, "nothing");
     console.log("id", payload.id);
